@@ -23,25 +23,14 @@ Rules that override everything below:
 
 ## Practice identity
 
-Each practice is a Markdown file whose first line holds a UUIDv7 ID:
+Each practice is a Markdown file whose first line holds an immutable UUIDv7 ID:
 
 ```markdown
 <!-- id: 0193a5c0-0000-7000-8000-000000000000 -->
 # Some practice
 ```
 
-Match practices in this order:
-
-1. **By ID.** Files with the same ID are the same practice, even if a local
-   file has been renamed or moved.
-2. **By content**, for files without an ID (for example, copies installed before
-   the practice got an ID). A local file is the same practice as an upstream one if:
-   - its content matches any version of that practice in upstream history
-     (see step 4), or
-   - it sits at the same relative path as the upstream file.
-
-Files with no ID that aren't practices (images, READMEs, and so on) are matched by
-relative path.
+Try to match practices by ID. If ID is missing use fuzzy match on the title, path and content.
 
 ## Procedure
 
