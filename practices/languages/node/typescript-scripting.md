@@ -1,3 +1,4 @@
+<!-- id: 01a1f84d-a863-7063-963a-52f91108df80 -->
 # TypeScript scripting
 
 Status: 🟡
