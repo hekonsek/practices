@@ -147,26 +147,7 @@ Never touch local practices that don't exist upstream.
 
 ### 5. Merge local changes (case c)
 
-1. **Find the base**, meaning the upstream version the local copy was derived from:
-   - Preferred: walk the local file's git history from newest to oldest
-     (`git log --follow --format=%H --name-only -- "$L"`). The base is the first
-     version whose blob exists upstream (`git -C "$UP" cat-file -e <blob>`).
-   - Fallback (no usable git history): out of all historical upstream versions of
-     that practice, pick the one with the smallest `diff` against `L`.
-     ```bash
-     git -C "$UP" log --format=%H --follow -- "practices/$REL"
-     ```
-2. **Merge**, resolving every conflicting hunk in favour of the local side:
-   ```bash
-   git merge-file -p --ours "$L" "$BASE" "$U" > "$L.merged" && mv "$L.merged" "$L"
-   ```
-   Upstream changes that don't conflict are applied. Where they do conflict,
-   the local text is kept.
-3. Check the result. The merged file must still contain every local edit, so
-   diff the merged file against `L` before replacing it. Make a note of any
-   upstream hunks that were dropped because of a conflict, to include in the report.
-4. If no base can be found at all, leave `L` untouched and report it as
-   "locally modified, not merged".
+Compare local practice version with upstream version. Merge the changes, resolving every conflicting hunk in favour of the local side. Upstream changes that don't conflict are applied. Where they do conflict, the local text is kept.
 
 ### 6. Report and clean up
 
